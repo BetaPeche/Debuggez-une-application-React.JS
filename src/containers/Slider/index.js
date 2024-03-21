@@ -17,14 +17,15 @@ const Slider = () => {
     );
   };
   useEffect(() => {
-    nextCard();
+    if (byDateDesc) {
+      nextCard();
+    }
   });
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        <div key={event.title}>
           <div
-            key={event.title}
             className={`SlideCard SlideCard--${index === idx ? "display" : "hide"
               }`}
           >
@@ -41,18 +42,18 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  readOnly
+                  key={`${radioIdx + 1}`}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={index === radioIdx}
                 />
               ))}
             </div>
           </div>
-        </>
-      ))
-      }
-    </div >
+        </div>
+      ))}
+    </div>
   );
 };
 
